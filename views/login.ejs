@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+    <!-- JavaScript Bundle with Popper -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Testproject</title>
+</head>
+<body>
+
+    <style>
+        /* Author ITSRBL */
+
+/* Login And Register BG_Image */
+.login_bg {
+    background: url("https://source.unsplash.com/rFBA42UFpLs/600x800");
+    background-position: center;
+    background-size: cover;
+}
+.register_bg {
+    background: url("https://source.unsplash.com/rFBA42UFpLs/600x800");
+    background-position: center;
+    background-size: cover;
+}
+.small {
+    text-decoration: none;
+    font-size: 80%;
+    font-weight: 400;
+  }
+  .error{
+    color: red;
+  }
+
+input {
+    border-radius: 200px !important;
+}
+
+.logo{
+    height: 4rem;
+    width: 4rem;
+}
+
+    </style>
+    
+
+    <div class="container bg-white">
+        <nav class="navbar navbar-expand-md navbar-light bg-white">
+            <div class="container-fluid p-0"> <a class="navbar-brand text-uppercase fw-800" href="#"><img class="logo" src="../logo/logo.png" alt=""></a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNav" aria-controls="myNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="fas fa-bars"></span> </button>
+
+        </nav>
+            <!-- MAIN START -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="card overflow-hidden shadow-lg my-5">
+
+                <div class="row bg-light bg-opacity-50 p-5">
+                    <div class="col-sm-6 login_bg"></div>
+                    <div class="col-sm-6">
+                        <h2 class="text-success">User Login</h2>
+
+                        <% if(err.length>0){%>
+                            <p class="alert alert-danger mb-2"><%=err %> </p>
+                        <%} %>
+                        <% if(success.length>0){%>
+                            <p class="alert alert-success mb-2"><%=success %> </p>
+                        <%} %>
+                       
+
+                        <form action="/login_post" id="loginValidation" method="post">
+                            <div class="row">
+                            <label class="form-label" for="">Email</label>
+                            <input type="text" class="form-control" required placeholder="Enter your email address" name="email">
+                        </div>
+                        <div class="row">
+                            <label class="form-label" for="">Password</label>
+                            <input type="password" class="form-control" placeholder="Enter your password" name="password">
+                        </div>
+                            <input type="submit" class="mt-4 form-control btn-success" value="Login">
+                        </form>
+
+                        <hr>
+                        <div class="text-center">
+                            <a class="small text-success" href="forgot">Forgot Password!</a>
+                        </div>
+                        <div class="text-center">
+                            <a class="small text-success" href="register">Create an Account!</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- MAIN END -->
+
+        
+    </div>
+
+
+
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+<script>
+    $(document).ready(function(){
+        jQuery.validator.addMethod('gmail', function (value, element) {
+    return this.optional(element) || /^\w*\@(?!org)(?!net)[g][m][a][i][l]\.com$/i.test(value);
+}, "not a valid Gmail email address");
+$.validator.addMethod("passwordFormatCheck", function(value, element) {
+    return this.optional(element) || /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).*$/.test(value);
+}, 'Password must contain one capital letter,on small letter,one numerical and one special character');
+            $('#loginValidation').validate({
+                rules:{
+                    email:{
+                        required:true,
+                        // email:true,
+                        gmail:true
+                    },
+                    password:{
+                        required:true,
+                        minlength:8,
+                        passwordFormatCheck:true
+
+                    }
+                },
+                messages:{
+                    email:{
+                        required:"Please enter email",
+                        // email:"Please enter a valid email",
+                        gmail:"Please enter only gmail account"
+                    },
+                    password:{
+                      required:"Please enter password",
+                      minlength:"Password must contain atleast 8 charecters"
+                    }
+                }
+            })
+    })
+</script>
